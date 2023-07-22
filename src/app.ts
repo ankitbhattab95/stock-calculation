@@ -14,10 +14,5 @@ export class App {
         return this.app
     }
 
-    public start() {
-        this.app.listen(process.env.PORT, () => {
-            console.log('> App server running on port ' + process.env.PORT);
-        });
-    }
 
 }
