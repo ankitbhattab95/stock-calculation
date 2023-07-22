@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>stocks app</title>
+</head>
+<body>
+  <h2>Enter SKU id and click submit to make API call</h2>
+
+  <form id="apiForm">
+    <label for="idInput" >Enter sku ID:</label>
+    <input type="text" value="FZV366142/87/47" id="idInput" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <br>
+  <h2>Response will be printed below:</h2>
+  <pre id="apiResponse"></pre>
+
+  <script>
+    document.getElementById('apiForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const id = document.getElementById('idInput').value;
+      let apiEndpoint = "http://localhost:"+{{port}}+"/stock?sku="+id;
+      fetch(apiEndpoint)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          console.log('API response:', data);
+          displayResponse(data);
+        })
+        .catch(error => {
+          console.error('API call failed:', error);
+        });
+    });
+
+    function displayResponse(data) {
+      const responseContainer = document.getElementById('apiResponse');
+      responseContainer.innerText = JSON.stringify(data, null, 4);
+    }
+
+  </script>
+</body>
+</html>
