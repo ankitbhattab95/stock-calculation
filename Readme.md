@@ -6,7 +6,7 @@
   ```
 - change dir
   ```
-  stock-calculation
+  cd stock-calculation
   ```
 - Install all the dependencies :
   ```
