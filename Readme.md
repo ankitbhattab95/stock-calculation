@@ -2,7 +2,7 @@
 ## Steps to run this project
 - First, clone this repo :
   ```
-  git@github.com:ankitbhattab95/stock-calculation.git
+  git clone git@github.com:ankitbhattab95/stock-calculation.git
   ```
 - change dir
   ```
