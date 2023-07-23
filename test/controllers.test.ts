@@ -64,7 +64,7 @@ describe('Controller checks', () => {
         try {
             const result = await stockController.getStockInfo('random')
         } catch (error: any) {
-            expect(error.message).toEqual('Invalid SKU')
+            expect(error.message).toEqual(constants.INVALID_SKU_MSG)
         }
     })
 

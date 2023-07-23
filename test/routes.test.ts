@@ -1,8 +1,9 @@
 import request from 'supertest'
 import 'dotenv/config';
+import constants from '../src/constants.json'
 import { App } from '../src/app';
 const appInstance = new App();
-const app=appInstance.getApp()
+const app = appInstance.getApp()
 
 
 describe('Router checks', () => {
@@ -15,13 +16,13 @@ describe('Router checks', () => {
     it('GET /stock --> should check for query param', async () => {
         const result = await request(app).get('/stock')
         expect(result.statusCode).toEqual(400)
-        expect(result.body).toEqual({ success: false, message: 'Missing query param: sku' })
+        expect(result.body).toEqual({ success: false, message: constants.MISSING_PARAM_MSG })
     })
 
     it('GET /stock --> should send a failure response for invalid sku id', async () => {
         const result = await request(app).get('/stock?sku=1')
         expect(result.statusCode).toEqual(400)
-        expect(result.body).toEqual({ success: false, message: 'Invalid SKU' })
+        expect(result.body).toEqual({ success: false, message: constants.INVALID_SKU_MSG })
     })
 
     it('GET /stock --> should send a success response for valid sku id', async () => {
