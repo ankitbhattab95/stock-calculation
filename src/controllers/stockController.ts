@@ -1,14 +1,14 @@
-import { Request, Response } from 'express';
-import { readFileSync, readFile } from 'fs';
+import { readFile } from 'fs';
 import { resolve } from 'path';
+import constants from '../constants.json'
 
 export class StockController {
 
     public async getStockInfo(sku: string): Promise<{ "sku": string, "qty": number }> {
         // read stocks.json and transactions.json in async manner
         let [stocks, transactions] = await Promise.all([
-            this.getFileData(String(process.env.STOCK_FILE_PATH)),
-            this.getFileData(String(process.env.TRANSACTION_FILE_PATH))
+            this.getFileData(String(constants.STOCK_FILE_PATH)),
+            this.getFileData(String(constants.TRANSACTION_FILE_PATH))
         ])
 
         // filter stocks by sku
@@ -40,7 +40,7 @@ export class StockController {
 
         // throw an error for sku missing in both stockJson and transactionJson files
         if (!isTransactionPresent && !isStockPresent) {
-            throw new Error('Invalid SKU')
+            throw new Error(constants.INVALID_SKU_MSG)
         }
 
         return { sku, "qty": stock[0].stock }

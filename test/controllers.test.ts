@@ -3,12 +3,13 @@ import { App } from '../src/app';
 const appInstance = new App();
 const app = appInstance.getApp()
 import { StockController } from '../src/controllers/stockController';
+import constants from '../src/constants.json'
 let stockController = new StockController();
 
 describe('Controller checks', () => {
 
     it('should throw an Error if the file is not read successfully', async () => {
-        process.env.STOCK_FILE_PATH='./invalid.json'
+        constants.STOCK_FILE_PATH='./invalid/path.json'
         try {
             const result = await stockController.getStockInfo('random')
         } catch (error) {
@@ -32,10 +33,10 @@ describe('Controller checks', () => {
             }]
         const mockStockFile = [{}]
         getFileData.mockImplementation((filename) => {
-            if (filename === process.env.STOCK_FILE_PATH) {
+            if (filename === constants.STOCK_FILE_PATH) {
                 return mockStockFile
             }
-            else if (filename === process.env.TRANSACTION_FILE_PATH) {
+            else if (filename === constants.TRANSACTION_FILE_PATH) {
                 return mockTransactionFile
             }
         });
@@ -52,10 +53,10 @@ describe('Controller checks', () => {
         const mockTransactionFile = [{}]
         const mockStockFile = [{}]
         getFileData.mockImplementation((filename) => {
-            if (filename === process.env.STOCK_FILE_PATH) {
+            if (filename === constants.STOCK_FILE_PATH) {
                 return mockStockFile
             }
-            else if (filename === process.env.TRANSACTION_FILE_PATH) {
+            else if (filename === constants.TRANSACTION_FILE_PATH) {
                 return mockTransactionFile
             }
         });
@@ -85,10 +86,10 @@ describe('Controller checks', () => {
         }]
         const initialLevel = mockStockFile[0].stock
         getFileData.mockImplementation((filename) => {
-            if (filename === process.env.STOCK_FILE_PATH) {
+            if (filename === constants.STOCK_FILE_PATH) {
                 return mockStockFile
             }
-            else if (filename === process.env.TRANSACTION_FILE_PATH) {
+            else if (filename === constants.TRANSACTION_FILE_PATH) {
                 return mockTransactionFile
             }
         });
@@ -118,10 +119,10 @@ describe('Controller checks', () => {
         }]
         const initialLevel = mockStockFile[0].stock
         getFileData.mockImplementation((filename) => {
-            if (filename === process.env.STOCK_FILE_PATH) {
+            if (filename === constants.STOCK_FILE_PATH) {
                 return mockStockFile
             }
-            else if (filename === process.env.TRANSACTION_FILE_PATH) {
+            else if (filename === constants.TRANSACTION_FILE_PATH) {
                 return mockTransactionFile
             }
         });

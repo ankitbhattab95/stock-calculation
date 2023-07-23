@@ -1,5 +1,6 @@
 import { Application, Request, Response } from 'express';
 import { StockController } from '../controllers/stockController';
+import constants from '../constants.json'
 
 export class StockRoutes {
     private stockController: StockController;
@@ -17,7 +18,7 @@ export class StockRoutes {
         app.get('/stock', async (req: Request, res: Response) => {
             try {
                 if (!("sku" in req.query)) {
-                    throw new Error('Missing query param: sku')
+                    throw new Error(constants.MISSING_PARAM_MSG)
                 }
                 const sku: string = String(req.query.sku)
                 console.log(`> Request received ${req.url}`)
